@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,14 +59,68 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    var jitsiMeet = JitsiMeet();
+    var options = JitsiMeetConferenceOptions(
+        room: 'EC00118592211',
+        serverURL: 'https://eclinicmarwahvica.com',
+        configOverrides: {},
+        featureFlags: {
+          'add-people.enabled': false,
+          'audio-focus.disabled': false,
+          'audio-mute.enabled': false,
+          'audio-only.enabled': false,
+          'breakout-rooms.enabled': false,
+          'calendar.enabled': false,
+          'call-integration.enabled': false,
+          'car-mode.enabled': false,
+          'close-captions.enabled': false,
+          'conference-timer.enabled': false,
+          'chat.enabled': false,
+          'filmstrip.enabled': false,
+          'fullscreen.enabled': false,
+          'help.enabled': false,
+          'invite.enabled': false,
+          'invite-dial-in.enabled': false,
+          'ios.recording.enabled': false,
+          'ios.screensharing.enabled': false,
+          'android.screensharing.enabled': false,
+          'speakerstats.enabled': false,
+          'kick-out.enabled': false,
+          'live-streaming.enabled': false,
+          'lobby-mode.enabled': false,
+          'meeting-name.enabled': false,
+          'meeting-password.enabled': false,
+          'notifications.enabled': false,
+          'overflow-menu.enabled': false,
+          'pip.enabled': false,
+          'pip-while-screen-sharing.enabled': false,
+          'prejoinpage.enabled': false,
+          'prejoinpage.hideDisplayName': false,
+          'raise-hand.enabled': false,
+          'reactions.enabled': false,
+          'recording.enabled': false,
+          'replace.participant': false,
+          'resolution': false,
+          'security-options.enabled': false,
+          'server-url-change.enabled': false,
+          'settings.enabled': false,
+          'tile-view.enabled': false,
+          'toolbox.alwaysVisible': true,
+          'toolbox.enabled': true,
+          'unsaferoomwarning.enabled': false,
+          'video-mute.enabled': false,
+          'video-share.enabled': false,
+          'welcomepage.enabled': false,
+        },
+        userInfo: JitsiMeetUserInfo(
+          displayName: "Bukhori",
+          email: "mosleim@mail.com",
+        ));
+    jitsiMeet.join(options,
+        JitsiMeetEventListener(conferenceTerminated: (str, obj) {
+      print(str);
+      print(obj);
+    }));
   }
 
   @override
